@@ -14,6 +14,7 @@
             justify-content: center;
             align-items: center;
             min-height: 100vh;
+            flex-direction: column;
         }
 
         .container {
@@ -75,13 +76,21 @@
             color: #007bff;
             font-size: 1.5rem;
         }
+
+        img {
+            max-width: 150px; /* Zmienna szerokość logo */
+            margin-bottom: 20px;
+        }
     </style>
 </head>
 <body>
+    <!-- LOGO -->
+    <img src="DW_mini.png" alt="Logo zespołu">
+
     <div class="container">
         <h1>Filtracja słów</h1>
         <form method="POST">
-            <input type="text" name="pattern" placeholder="Wpisz wzorzec" required>
+            <input type="text" name="pattern" placeholder="Wpisz wzorzec (np. a__le)" required>
             <button type="submit">Filtruj</button>
         </form>
 
