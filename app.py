@@ -201,21 +201,23 @@ words = ["token", "chain", "proof", "stake", "nodes", "ether", "smart", "coins",
          "swaps", "rates", "bonds", "sybil", "nitro"];
 
 
+def match_pattern(word, pattern):
+    # Convert the pattern to a regular expression, where "_" can mean any letter
+    regex_pattern = pattern.replace("_", ".")
+    # Match must be exact and cover the entire word (from start to finish)
+    return re.fullmatch(regex_pattern, word)
+
+
 @app.route("/", methods=["GET", "POST"])
 def index():
     filtered_words = []
-    # Utrzymujemy domyślne wartości pustych pól, jeśli użytkownik nie wypełni ich na początku
-    pattern = ""
-    exclude_letters = ""
-    required_letters = ""
-
     if request.method == "POST":
-        # Pobierz dane wprowadzone przez użytkownika
-        pattern = request.form.get("pattern", "")
+        pattern = request.form.get("pattern")
         exclude_letters = request.form.get("exclude_letters", "")
         required_letters = request.form.get("required_letters", "")
 
-        if pattern and len(pattern) == 5:  # Filtrujemy tylko, jeśli wzorzec jest poprawnej długości
+        if pattern and len(pattern) == 5:  # Check if the pattern has 5 characters
+            # Filter words that match the pattern, do not contain excluded letters, and contain required letters
             filtered_words = [
                 word for word in words
                 if match_pattern(word, pattern)
@@ -223,11 +225,8 @@ def index():
                    and all(letter in word for letter in required_letters)
             ]
 
-    # Przekazujemy wpisane wartości z powrotem do szablonu
-    return render_template(
-        "index.html",
-        filtered_words=filtered_words,
-        pattern=pattern,
-        exclude_letters=exclude_letters,
-        required_letters=required_letters
-    )
+    return render_template("index.html", filtered_words=filtered_words)
+
+
+if __name__ == "__main__":
+    app.run(debug=True)
