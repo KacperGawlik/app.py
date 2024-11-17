@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request
 import re
-
+#Siema
 app = Flask(__name__)
 
 # Baza słówek - Shardeum
