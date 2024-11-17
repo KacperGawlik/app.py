@@ -37,9 +37,9 @@
         }
 
         input[type="text"] {
-            width: 100%;
+            width: 100%; /* Full width for better alignment */
             padding: 10px;
-            margin-bottom: 15px;
+            margin-bottom: 15px; /* Space between inputs */
             border: 2px solid #ddd;
             border-radius: 5px;
             font-size: 1rem;
@@ -78,7 +78,7 @@
         }
 
         img {
-            max-width: 150px;
+            max-width: 150px; /* Variable logo width */
             margin-bottom: 20px;
         }
     </style>
@@ -90,25 +90,9 @@
     <div class="container">
         <h1>Filtracja słów</h1>
         <form method="POST">
-            <input 
-                type="text" 
-                name="pattern" 
-                placeholder="Wpisz wzorzec (np. a__le)" 
-                value="{{ pattern }}" 
-                required
-            >
-            <input 
-                type="text" 
-                name="exclude_letters" 
-                placeholder="Litery do wykluczenia (np. abc)" 
-                value="{{ exclude_letters }}"
-            >
-            <input 
-                type="text" 
-                name="required_letters" 
-                placeholder="Litery do uwzględnienia (np. e)" 
-                value="{{ required_letters }}"
-            >
+            <input type="text" name="pattern" placeholder="Wpisz wzorzec (np. a__le)" required>
+            <input type="text" name="exclude_letters" placeholder="Litery do wykluczenia (np. abc)">
+            <input type="text" name="required_letters" placeholder="Litery do uwzględnienia (np. e)">
             <button type="submit">Filtruj</button>
         </form>
 
